@@ -1,0 +1,5 @@
+cargo,Airbus A300,544,7500,105000000,170500
+fighter,F-15 Eagle,1875,2992,79000000,4
+commercial,Boeing 737,522,3825,82000000
+private,Learjet 60,521,2783,1000000,8
+fighter,Eurofighter Typhoon,1550,1802,105000000,7
