@@ -9,10 +9,10 @@ public class CargoPlane extends Jet implements CargoCarrier {
 		System.out.println(getModel()
 				+ " is a fixed-wing aircraft that is designed or converted for the carriage of cargo rather than passengers.  ");
 		System.out.println();
-		System.out.println("Its speed is: " + getSpeed() + " " + "with a range of: " + getRange());
+		System.out.println("Its speed is: "+ getSpeed() + "/mph " + "with a range of: "+ getRange()+"/km");
 		System.out.println();
 		System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "
-				+ ((double) (getRange() / getSpeed())));
+				+ Math.round((double)(getRange() / getSpeed()))+ "hrs.");
 		System.out.println();
 	}
 

@@ -355,6 +355,7 @@ public class JetsApplication {
 						kb.nextLine();
 						System.out.println("Please enter Price: ");
 						price = kb.nextLong();
+						kb.nextLine();
 						System.out.println("Please enter Max Weight: ");
 						maxWeight = kb.nextDouble();
 						jet = new CargoPlane(model, speed, range, price, maxWeight);
@@ -363,6 +364,7 @@ public class JetsApplication {
 						break;
 					} catch (InputMismatchException e) {
 						System.err.println("Invalid option please try again");
+						kb.nextLine();
 					}
 				case 2:
 					try {
@@ -375,6 +377,7 @@ public class JetsApplication {
 						kb.nextLine();
 						System.out.println("Please enter Price: ");
 						price = kb.nextLong();
+						kb.nextLine();
 						System.out.println("Please enter number of Weapons: ");
 						weapons = kb.nextInt();
 						kb.nextLine();
@@ -384,6 +387,7 @@ public class JetsApplication {
 						break;
 					} catch (InputMismatchException e) {
 						System.err.println("Invalid option please try again");
+						kb.nextLine();
 					}
 				case 3:
 					try {
@@ -396,6 +400,7 @@ public class JetsApplication {
 						kb.nextLine();
 						System.out.println("Please enter Price: ");
 						price = kb.nextLong();
+						kb.nextLine();
 						System.out.println("Please enter Max number of Passengers: ");
 						numPass = kb.nextInt();
 						kb.nextLine();
@@ -405,6 +410,7 @@ public class JetsApplication {
 						break;
 					} catch (InputMismatchException e) {
 						System.err.println("Invalid option please try again");
+						kb.nextLine();
 					}
 				case 4:
 					try {
@@ -417,13 +423,17 @@ public class JetsApplication {
 						kb.nextLine();
 						System.out.println("Please enter Price: ");
 						price = kb.nextLong();
+						kb.nextLine();
 						jet = new CommercialJet(model, speed, range, price);
 						af.addJet(jet);
 						go = false;
 						break;
 					} catch (InputMismatchException e) {
 						System.err.println("Invalid option please try again");
+						kb.nextLine();
 					}
+				default:
+					System.out.println("Invalid option please try again.");
 				}
 
 			} catch (InputMismatchException e) {

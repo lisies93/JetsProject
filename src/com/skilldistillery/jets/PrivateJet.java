@@ -8,9 +8,9 @@ public class PrivateJet extends Jet implements BoardPlane{
 	public void fly() {
 		System.out.println(getModel()+ " is a jet aircraft designed for transporting small groups of people.  ");
 		System.out.println();
-System.out.println("Its speed is: "+ getSpeed() + " " + "with a range of: "+ getRange());
+		System.out.println("Its speed is: "+ getSpeed() + "/mph " + "with a range of: "+ getRange()+"/km");
 System.out.println();
-System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "+((double)(getRange() / getSpeed())));
+System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "+Math.round((double)(getRange() / getSpeed()))+ "hrs.");
 System.out.println();
 	}
 	
