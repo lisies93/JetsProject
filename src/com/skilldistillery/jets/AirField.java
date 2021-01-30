@@ -51,6 +51,5 @@ public class AirField {
 		return true;
 	}
 	
-//.	
 	
 }

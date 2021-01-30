@@ -37,10 +37,6 @@ System.out.println();
 		System.out.println("Im a private jet and im boarding all my passengers....");
 		
 	}
-
-	
-	
-	//.
 	
 	
 }

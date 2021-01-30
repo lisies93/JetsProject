@@ -39,5 +39,4 @@ public class CargoPlane extends Jet implements CargoCarrier {
 	public String toString() {
 		return "Cargo Plane " + super.toString() + " |maxWeight: " + maxWeight + "|";
 	}
-//.
 }

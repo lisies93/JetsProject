@@ -4,6 +4,5 @@ public interface CombatReady {
 
 	
 	public void Fight();
-	//.
 }
 
