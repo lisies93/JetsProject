@@ -38,7 +38,7 @@ System.out.println();
 		return "Fighter Jet " + super.toString() + " |weapons: "+ weapons+ "|";
 	}
 	
-	
+	//.
 	
 	
 }

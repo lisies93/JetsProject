@@ -30,7 +30,9 @@ public class JetsApplication {
 		int weapons;
 		int numPass;
 		Jet jet = null;
-
+		
+        // Reading text file with jets information
+		
 		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
 			String line;
 			while ((line = bufIn.readLine()) != null) {
@@ -43,6 +45,7 @@ public class JetsApplication {
 					range = Integer.parseInt(jetsRecord[3]);
 					price = Long.parseLong(jetsRecord[4]);
 					maxWeight = Double.parseDouble(jetsRecord[5]);
+					// adding objects to the list
 					jet = new CargoPlane(model, speed, range, price, maxWeight);
 					af.addJet(jet);
 					break;
@@ -79,7 +82,7 @@ public class JetsApplication {
 			System.err.println(e);
 		}
 	}
-
+ 
 	private void displayUserMenu() {
 
 		System.out.println("---------------------------------------");
@@ -212,7 +215,8 @@ public class JetsApplication {
 		}
 
 	}
-
+	
+// show all the jets 
 	private void listFleet() {
 		int index = 1;
 
@@ -222,7 +226,7 @@ public class JetsApplication {
 			index++;
 		}
 	}
-
+// this method will show a short description of the jets
 	public void makeJetsFly() {
 
 		for (Jet jet : af.getJets()) {
@@ -239,7 +243,7 @@ public class JetsApplication {
 
 		}
 	}
-
+// will print the fastest jet
 	public void getFastestJet() {
 
 		Jet fastestJet = null;
@@ -259,6 +263,7 @@ public class JetsApplication {
 		System.out.println(fastestJet);
 	}
 
+// will print the longest rate jet
 	private void getLongestRange() {
 		Jet longestRange = null;
 		double max = 0;
@@ -277,7 +282,7 @@ public class JetsApplication {
 		System.out.println(longestRange);
 
 	}
-
+// will display all the cargo jets
 	private void loadCargoJets() {
 
 		for (Jet jet : af.getJets()) {
@@ -291,7 +296,7 @@ public class JetsApplication {
 		}
 
 	}
-
+// will display all the fighter jets
 	private void makeThemFight() {
 		for (Jet jet : af.getJets()) {
 			if (jet instanceof FighterJet) {
@@ -303,7 +308,7 @@ public class JetsApplication {
 			}
 		}
 	}
-
+// will display all the private jets
 	private void boardPassengers() {
 		for (Jet jet : af.getJets()) {
 			if (jet instanceof PrivateJet) {
@@ -315,7 +320,7 @@ public class JetsApplication {
 			}
 		}
 	}
-
+// will add new jets to the list
 	private void addJets() {
 		int option = 0;
 		boolean go = true;
@@ -443,7 +448,7 @@ public class JetsApplication {
 
 		}
 	}
-
+// will remove any jet from the list
 	private void removeJet() {
 		String removeModel = "";
 		boolean go = true;

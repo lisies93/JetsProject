@@ -16,7 +16,6 @@ public class AirField {
 	}
 	
 	
-
 	public void addJet(Jet jet) {
 
 		jets.add(jet);	
@@ -52,6 +51,6 @@ public class AirField {
 		return true;
 	}
 	
-	
+//.	
 	
 }

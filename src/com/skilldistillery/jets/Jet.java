@@ -77,7 +77,7 @@ public abstract class Jet {
 				+ getSpeedInMach()+ "|, |range: " + range + "|, |price: " + price + "|";
 	}
 	
-	
+	//.
 	
 	
 }
