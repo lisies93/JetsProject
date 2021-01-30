@@ -3,8 +3,6 @@ package com.skilldistillery.jets;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -31,6 +29,7 @@ public class JetsApplication {
 		double maxWeight;
 		int weapons;
 		int numPass;
+		Jet jet = null;
 
 		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
 			String line;
@@ -44,7 +43,8 @@ public class JetsApplication {
 					range = Integer.parseInt(jetsRecord[3]);
 					price = Long.parseLong(jetsRecord[4]);
 					maxWeight = Double.parseDouble(jetsRecord[5]);
-					af.addJet(new CargoPlane(model, speed, range, price, maxWeight));
+					jet = new CargoPlane(model, speed, range, price, maxWeight);
+					af.addJet(jet);
 					break;
 				case "fighter":
 					model = jetsRecord[1];
@@ -52,14 +52,16 @@ public class JetsApplication {
 					range = Integer.parseInt(jetsRecord[3]);
 					price = Long.parseLong(jetsRecord[4]);
 					weapons = Integer.parseInt(jetsRecord[5]);
-					af.addJet(new FighterJet(model, speed, range, price, weapons));
+					jet = new FighterJet(model, speed, range, price, weapons);
+					af.addJet(jet);
 					break;
 				case "commercial":
 					model = jetsRecord[1];
 					speed = Double.parseDouble(jetsRecord[2]);
 					range = Integer.parseInt(jetsRecord[3]);
 					price = Long.parseLong(jetsRecord[4]);
-					af.addJet(new CommercialJet(model, speed, range, price));
+					jet = new CommercialJet(model, speed, range, price);
+					af.addJet(jet);
 					break;
 				case "private":
 					model = jetsRecord[1];
@@ -67,7 +69,8 @@ public class JetsApplication {
 					range = Integer.parseInt(jetsRecord[3]);
 					price = Long.parseLong(jetsRecord[4]);
 					numPass = Integer.parseInt(jetsRecord[5]);
-					af.addJet(new PrivateJet(model, speed, range, price, numPass));
+					jet = new PrivateJet(model, speed, range, price, numPass);
+					af.addJet(jet);
 					break;
 				}
 			}
@@ -112,8 +115,6 @@ public class JetsApplication {
 
 	private void run() {
 		JetsApplication ja = new JetsApplication();
-		Collection<Jet> listFleet = new ArrayList<Jet>();
-		listFleet.addAll(af.getJets());
 
 		boolean option = true;
 		int numOption = 0;
@@ -127,55 +128,111 @@ public class JetsApplication {
 				kb.nextLine();
 				switch (numOption) {
 				case 1:
-					listFleet(listFleet);
+					System.out.println();
+					System.out.println();
+					listFleet();
+					System.out.println();
+					System.out.println();
 					break;
 				case 2:
-					makeJetsFly(listFleet);
+					System.out.println();
+					System.out.println();
+					makeJetsFly();
+					System.out.println();
+					System.out.println();
 					break;
 				case 3:
-					getFastestJet(listFleet);
+					System.out.println();
+					System.out.println();
+					getFastestJet();
+					System.out.println();
+					System.out.println();
 					break;
 				case 4:
-					getLongestRange(listFleet);
+					System.out.println();
+					System.out.println();
+					getLongestRange();
+					System.out.println();
+					System.out.println();
 					break;
 				case 5:
-					loadCargoJets(listFleet);
+					System.out.println();
+					System.out.println();
+					loadCargoJets();
+					System.out.println();
+					System.out.println();
 					break;
 				case 6:
-					makeThemFight(listFleet);
+					System.out.println();
+					System.out.println();
+					makeThemFight();
+					System.out.println();
+					System.out.println();
 					break;
 				case 7:
-					boardPassengers(listFleet);
+					System.out.println();
+					System.out.println();
+					boardPassengers();
+					System.out.println();
+					System.out.println();
 					break;
 				case 8:
-					removeJet(listFleet);
-
+					System.out.println();
+					System.out.println();
+					addJets();
+					System.out.println();
+					System.out.println();
+					break;
+				case 9:
+					System.out.println();
+					System.out.println();
+					removeJet();
+					System.out.println();
+					System.out.println();
+					break;
+				case 10:
+					System.out.println();
+					System.out.println("See You Later!");
+					option = false;
+					break;
+				default:
+					System.out.println();
+					System.out.println();
+					System.out.println("Invalid option please try again");
+					System.out.println();
+					System.out.println();
+					break;
 				}
 
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid input please try again.");
+				kb.nextLine();
 			}
 
 		}
 
 	}
 
-	private void listFleet(Collection<Jet> listFleet) {
+	private void listFleet() {
 		int index = 1;
 
-		for (Jet jet : listFleet) {
+		for (Jet jet : af.getJets()) {
 			System.out.println(index + ". " + jet);
 			System.out.println();
 			index++;
 		}
 	}
 
-	public void makeJetsFly(Collection<Jet> listFleet) {
+	public void makeJetsFly() {
 
-		for (Jet jet : listFleet) {
+		for (Jet jet : af.getJets()) {
 
+			System.out.println();
+			System.out.println();
 			System.out.println(jet.toString());
+			System.out.println();
 			jet.fly();
+			System.out.println();
 			System.out.println();
 			System.out.println();
 			System.out.println();
@@ -183,45 +240,51 @@ public class JetsApplication {
 		}
 	}
 
-	public void getFastestJet(Collection<Jet> listFleet) {
+	public void getFastestJet() {
 
 		Jet fastestJet = null;
 		double max = 0;
 
-		for (Jet jet : listFleet) {
+		for (Jet jet : af.getJets()) {
 			if (max < jet.getSpeed()) {
 				max = jet.getSpeed();
 				fastestJet = jet;
 			}
 		}
 
+		System.out.println();
+		System.out.println();
 		System.out.println("The fastest plane is: ");
 		System.out.println();
 		System.out.println(fastestJet);
 	}
 
-	private void getLongestRange(Collection<Jet> listFleet) {
+	private void getLongestRange() {
 		Jet longestRange = null;
 		double max = 0;
 
-		for (Jet jet : listFleet) {
+		for (Jet jet : af.getJets()) {
 			if (max < jet.getRange()) {
 				max = jet.getRange();
 				longestRange = jet;
 			}
 		}
 
+		System.out.println();
+		System.out.println();
 		System.out.println("The plane with the longest range is: ");
 		System.out.println();
 		System.out.println(longestRange);
 
 	}
 
-	private void loadCargoJets(Collection<Jet> listFleet) {
+	private void loadCargoJets() {
 
-		for (Jet jet : listFleet) {
+		for (Jet jet : af.getJets()) {
 			if (jet instanceof CargoPlane) {
+				System.out.println();
 				System.out.println(jet.toString());
+				System.out.println();
 				((CargoPlane) jet).loadCargo();
 				System.out.println();
 			}
@@ -229,44 +292,183 @@ public class JetsApplication {
 
 	}
 
-	private void makeThemFight(Collection<Jet> listFleet) {
-		for (Jet jet : listFleet) {
+	private void makeThemFight() {
+		for (Jet jet : af.getJets()) {
 			if (jet instanceof FighterJet) {
+				System.out.println();
 				System.out.println(jet.toString());
+				System.out.println();
 				((FighterJet) jet).Fight();
 				System.out.println();
 			}
 		}
 	}
 
-
-	private void boardPassengers(Collection<Jet> listFleet) {
-		for (Jet jet : listFleet) {
+	private void boardPassengers() {
+		for (Jet jet : af.getJets()) {
 			if (jet instanceof PrivateJet) {
+				System.out.println();
 				System.out.println(jet.toString());
+				System.out.println();
 				((PrivateJet) jet).boardPassengers();
 				System.out.println();
 			}
 		}
 	}
-	
-	private void removeJet(Collection<Jet> listFleet) {
-		int remove=0;
-		int i = 1;
-		System.out.println("Please select the jet that you want to remove ");
-		for (Jet jet : listFleet) {
-			System.out.println(i + ". " + jet.getClass().getSimpleName() + " "+ jet.getModel());
-			i++;
+
+	private void addJets() {
+		int option = 0;
+		boolean go = true;
+		String model;
+		int range;
+		double speed;
+		long price;
+		double maxWeight;
+		int weapons;
+		int numPass;
+		Jet jet = null;
+
+		while (go) {
+			System.out.println("Please select the type of yet that you want to add: ");
+			System.out.println();
+			System.out.println("1. Cargo Plane");
+			System.out.println();
+			System.out.println("2. Fighter Jet");
+			System.out.println();
+			System.out.println("3. Private Jet");
+			System.out.println();
+			System.out.println("4. Commertial Jet");
+
+			try {
+				option = kb.nextInt();
+				kb.nextLine();
+
+				switch (option) {
+				case 1:
+					try {
+						System.out.println("Please enter Model: ");
+						model = kb.nextLine();
+						System.out.println("Please enter Speed: ");
+						speed = kb.nextDouble();
+						System.out.println("Please enter Range: ");
+						range = kb.nextInt();
+						kb.nextLine();
+						System.out.println("Please enter Price: ");
+						price = kb.nextLong();
+						System.out.println("Please enter Max Weight: ");
+						maxWeight = kb.nextDouble();
+						jet = new CargoPlane(model, speed, range, price, maxWeight);
+						af.addJet(jet);
+						go = false;
+						break;
+					} catch (InputMismatchException e) {
+						System.err.println("Invalid option please try again");
+					}
+				case 2:
+					try {
+						System.out.println("Please enter Model: ");
+						model = kb.nextLine();
+						System.out.println("Please enter Speed: ");
+						speed = kb.nextDouble();
+						System.out.println("Please enter Range: ");
+						range = kb.nextInt();
+						kb.nextLine();
+						System.out.println("Please enter Price: ");
+						price = kb.nextLong();
+						System.out.println("Please enter number of Weapons: ");
+						weapons = kb.nextInt();
+						kb.nextLine();
+						jet = new FighterJet(model, speed, range, price, weapons);
+						af.addJet(jet);
+						go = false;
+						break;
+					} catch (InputMismatchException e) {
+						System.err.println("Invalid option please try again");
+					}
+				case 3:
+					try {
+						System.out.println("Please enter Model: ");
+						model = kb.nextLine();
+						System.out.println("Please enter Speed: ");
+						speed = kb.nextDouble();
+						System.out.println("Please enter Range: ");
+						range = kb.nextInt();
+						kb.nextLine();
+						System.out.println("Please enter Price: ");
+						price = kb.nextLong();
+						System.out.println("Please enter Max number of Passengers: ");
+						numPass = kb.nextInt();
+						kb.nextLine();
+						jet = new PrivateJet(model, speed, range, price, numPass);
+						af.addJet(jet);
+						go = false;
+						break;
+					} catch (InputMismatchException e) {
+						System.err.println("Invalid option please try again");
+					}
+				case 4:
+					try {
+						System.out.println("Please enter Model: ");
+						model = kb.nextLine();
+						System.out.println("Please enter Speed: ");
+						speed = kb.nextDouble();
+						System.out.println("Please enter Range: ");
+						range = kb.nextInt();
+						kb.nextLine();
+						System.out.println("Please enter Price: ");
+						price = kb.nextLong();
+						jet = new CommercialJet(model, speed, range, price);
+						af.addJet(jet);
+						go = false;
+						break;
+					} catch (InputMismatchException e) {
+						System.err.println("Invalid option please try again");
+					}
+				}
+
+			} catch (InputMismatchException e) {
+				System.err.println("Invalid option please try again");
+				kb.nextLine();
+			}
+
 		}
-		try {
-		remove = kb.nextInt();
-		kb.nextLine();
-//		remove = remove -1;
-//		Boolean removed = listFleet.remove();
-//		System.out.println("You successfully removed " + removed);
-		System.out.println();
-		} catch (InputMismatchException e) {
-			System.err.println("Invalid option please try again.");
+	}
+
+	private void removeJet() {
+		String removeModel = "";
+		boolean go = true;
+		boolean removed = false;
+		while (go) {
+
+			System.out.println("Please select the jet that you want to remove ");
+			System.out.println();
+			for (Jet jet : af.getJets()) {
+				System.out.println(jet.getModel());
+				System.out.println();
+			}
+
+			try {
+				removeModel = kb.nextLine();
+				for (Jet jet : af.getJets()) {
+					if (jet.getModel().toLowerCase().contains(removeModel)) {
+						removed = af.getJets().remove(jet);
+						go = false;
+						break;
+					}
+				}
+
+				if (removed) {
+					System.out.println();
+					System.out.println();
+					System.out.println("You successfully removed the jet");
+					go = false;
+				} else {
+					System.out.println("The model you entered was invalid please try again");
+				}
+
+			} catch (InputMismatchException e) {
+				System.err.println("Invalid option please try again.");
+			}
 		}
 	}
 }

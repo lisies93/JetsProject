@@ -8,8 +8,11 @@ public class CommercialJet extends Jet{
 	public void fly() {
 		
 		System.out.println(getModel()+ " is a type of aircraft for transporting passengers and air cargo.  ");
+		System.out.println();
 		System.out.println("Its speed is: "+ getSpeed() + " " + "with a range of: "+ getRange());
+		System.out.println();
 		System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "+((double)(getRange() / getSpeed())));
+		System.out.println();
 	}
 	public CommercialJet(String model, double speed, int range, long price) {
 		super(model, speed, range, price);
@@ -31,7 +34,7 @@ public class CommercialJet extends Jet{
 
 	@Override
 	public String toString() {
-		return "Commercial Jet " + super.toString()+ "Passenger Capacity: " +passCapacity;
+		return "Commercial Jet " + super.toString();
 	}
 	
 	

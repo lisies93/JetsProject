@@ -8,8 +8,11 @@ public class FighterJet extends Jet implements CombatReady {
 	public void fly() {
 		System.out.println(getModel()+ " is a military fixed-wing aircraft designed primarily "
                	+ "for air-to-air combat against other aircraft" );
+		System.out.println();
 System.out.println("Its speed is: "+ getSpeed() + " " + "with a range of: "+ getRange());
+System.out.println();
 System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "+((double)(getRange() / getSpeed())));
+System.out.println();
 	}
 	
 	@Override
@@ -32,7 +35,7 @@ System.out.println("The amount of time the jet can fly until it runs out of fuel
 
 	@Override
 	public String toString() {
-		return "FighterJet [weapons=" + weapons + ", toString()=" + super.toString() + "]";
+		return "Fighter Jet " + super.toString() + " |weapons: "+ weapons+ "|";
 	}
 	
 	

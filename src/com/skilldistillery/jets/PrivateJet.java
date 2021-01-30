@@ -7,8 +7,11 @@ public class PrivateJet extends Jet implements BoardPlane{
 	@Override
 	public void fly() {
 		System.out.println(getModel()+ " is a jet aircraft designed for transporting small groups of people.  ");
+		System.out.println();
 System.out.println("Its speed is: "+ getSpeed() + " " + "with a range of: "+ getRange());
+System.out.println();
 System.out.println("The amount of time the jet can fly until it runs out of fuel is approximatly:  "+((double)(getRange() / getSpeed())));
+System.out.println();
 	}
 	
 	public PrivateJet(String model, double speed, int range, long price, int maxPass) {
@@ -26,7 +29,7 @@ System.out.println("The amount of time the jet can fly until it runs out of fuel
 
 	@Override
 	public String toString() {
-		return "PrivateJet [maxPass=" + maxPass + ", toString()=" + super.toString() + "]";
+		return "Private Jet " + super.toString() + " |maxPass: "+maxPass + "|";
 	}
 
 	@Override

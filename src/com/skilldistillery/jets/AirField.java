@@ -1,13 +1,12 @@
 package com.skilldistillery.jets;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class AirField {
 
-	private Collection<Jet> jets = new ArrayList<Jet>();
+	private ArrayList<Jet> jets = new ArrayList<Jet>();
 
-	public AirField(Collection<Jet> jets) {
+	public AirField(ArrayList<Jet> jets) {
 		super();
 		this.jets = jets;
 	}
@@ -18,29 +17,39 @@ public class AirField {
 	
 	
 
-	public void addJet(CargoPlane jet) {
+	public void addJet(Jet jet) {
 
-		jets.add(jet);
-		
-	}
-
-	public void addJet(FighterJet fighterJet) {
-		
-		jets.add(fighterJet);
-	}
-
-	public void addJet(CommercialJet commercialJet) {
-		jets.add(commercialJet);
-		
-	}
-
-	public void addJet(PrivateJet privateJet) {
-		jets.add(privateJet);
-		
+		jets.add(jet);	
 	}
 	
-	public Collection<Jet> getJets(){
+	public ArrayList<Jet> getJets(){
 		return jets;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jets == null) ? 0 : jets.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AirField other = (AirField) obj;
+		if (jets == null) {
+			if (other.jets != null)
+				return false;
+		} else if (!jets.equals(other.jets))
+			return false;
+		return true;
 	}
 	
 	

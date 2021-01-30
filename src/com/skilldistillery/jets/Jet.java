@@ -73,8 +73,8 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
-		return "Jet [model=" + model + ", speed/Mph=" + speed + ", range=" + range + ", price=" + price + ", machSpeed="
-				+ machSpeed + "]";
+		return "|Model: " + model + "|, |speed/Mph: " + speed +" |machSpeed: " 
+				+ getSpeedInMach()+ "|, |range: " + range + "|, |price: " + price + "|";
 	}
 	
 	
