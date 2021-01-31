@@ -2,6 +2,7 @@ package com.skilldistillery.jets;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class JetsApplication {
 		JetsApplication ja = new JetsApplication();
 		String fileName = "jets.txt";
 		ja.readJetsFile(fileName);
-		ja.run();
+		ja.run(fileName);
 
 	}
 
@@ -30,9 +31,9 @@ public class JetsApplication {
 		int weapons;
 		int numPass;
 		Jet jet = null;
-		
-        // Reading text file with jets information
-		
+
+		// Reading text file with jets information
+
 		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
 			String line;
 			while ((line = bufIn.readLine()) != null) {
@@ -82,7 +83,7 @@ public class JetsApplication {
 			System.err.println(e);
 		}
 	}
- 
+
 	private void displayUserMenu() {
 
 		System.out.println("---------------------------------------");
@@ -93,30 +94,33 @@ public class JetsApplication {
 		System.out.println("|                                     |");
 		System.out.println("|   1. List fleet                     |");
 		System.out.println("|                                     |");
-		System.out.println("|   2. Fly all jets                   |");
+		System.out.println("|   2. Fly jets individually          |");
 		System.out.println("|                                     |");
-		System.out.println("|   3. View fastest jet               |");
+		System.out.println("|   3. Fly all jets                   |");
 		System.out.println("|                                     |");
-		System.out.println("|   4. View jet with longest range    |");
+		System.out.println("|   4. View fastest jet               |");
 		System.out.println("|                                     |");
-		System.out.println("|   5. Load all Cargo Jets            |");
+		System.out.println("|   5. View jet with longest range    |");
 		System.out.println("|                                     |");
-		System.out.println("|   6. Dogfight!                      |");
+		System.out.println("|   6. Load all Cargo Jets            |");
 		System.out.println("|                                     |");
-		System.out.println("|   7. Board Passengers               |");
+		System.out.println("|   7. Dogfight!                      |");
 		System.out.println("|                                     |");
-		System.out.println("|   8. Add a jet to Fleet             |");
+		System.out.println("|   8. Board Passengers               |");
 		System.out.println("|                                     |");
-		System.out.println("|   9. Remove a jet from Fleet        |");
+		System.out.println("|   9. Add a jet to Fleet             |");
 		System.out.println("|                                     |");
-		System.out.println("|  10. Quit                           |");
+		System.out.println("|   10. Remove a jet from Fleet       |");
 		System.out.println("|                                     |");
+		System.out.println("|   11. Create a new file with jets   |");
+		System.out.println("|                                     |");
+		System.out.println("|   12. Quit                          |");
 		System.out.println("|                                     |");
 		System.out.println("|                                     |");
 		System.out.println("---------------------------------------");
 	}
 
-	private void run() {
+	private void run(String fileName) {
 		JetsApplication ja = new JetsApplication();
 
 		boolean option = true;
@@ -140,60 +144,70 @@ public class JetsApplication {
 				case 2:
 					System.out.println();
 					System.out.println();
-					makeJetsFly();
+					individualJet();
 					System.out.println();
 					System.out.println();
 					break;
 				case 3:
 					System.out.println();
 					System.out.println();
-					getFastestJet();
-					System.out.println();
-					System.out.println();
+					makeJetsFly();
 					break;
 				case 4:
 					System.out.println();
 					System.out.println();
-					getLongestRange();
+					getFastestJet();
 					System.out.println();
 					System.out.println();
 					break;
 				case 5:
 					System.out.println();
 					System.out.println();
-					loadCargoJets();
+					getLongestRange();
 					System.out.println();
 					System.out.println();
 					break;
 				case 6:
 					System.out.println();
 					System.out.println();
-					makeThemFight();
+					loadCargoJets();
 					System.out.println();
 					System.out.println();
 					break;
 				case 7:
 					System.out.println();
 					System.out.println();
-					boardPassengers();
+					makeThemFight();
 					System.out.println();
 					System.out.println();
 					break;
 				case 8:
 					System.out.println();
 					System.out.println();
-					addJets();
+					boardPassengers();
 					System.out.println();
 					System.out.println();
 					break;
 				case 9:
 					System.out.println();
 					System.out.println();
-					removeJet();
+					addJets();
 					System.out.println();
 					System.out.println();
 					break;
 				case 10:
+					System.out.println();
+					System.out.println();
+					removeJet();
+					System.out.println();
+					System.out.println();
+					break;
+				case 11:
+					System.out.println();
+					System.out.println();
+					createNewFile(fileName);
+					break;
+				case 12:
 					System.out.println();
 					System.out.println("See You Later!");
 					option = false;
@@ -215,8 +229,8 @@ public class JetsApplication {
 		}
 
 	}
-	
-// show all the jets 
+
+	// show all the jets
 	private void listFleet() {
 		int index = 1;
 
@@ -226,6 +240,56 @@ public class JetsApplication {
 			index++;
 		}
 	}
+
+	// fly the jets individually
+	private void individualJet() {
+
+		boolean anotherJet = true;
+		int selectedJet = 0;
+
+		while (anotherJet) {
+
+			int index = 1;
+			System.out.println("Please select the jet that you want to fly today.");
+			System.out.println();
+			for (Jet jet : af.getJets()) {
+				System.out.println(index + ". " + jet.getModel());
+				System.out.println();
+				index++;
+			}
+
+			try {
+				selectedJet = kb.nextInt();
+				selectedJet = selectedJet - 1;
+				kb.nextLine();
+
+				for (Jet jet : af.getJets()) {
+					if (af.getJets().indexOf(jet) == selectedJet) {
+						jet.fly();
+						System.out.println();
+						System.out.println();
+						System.out.println("Do you want to fly another jet? (Y/N)");
+
+						String yesOrNot = kb.nextLine();
+						if ((yesOrNot.toUpperCase().equals("YES")) || (yesOrNot.toUpperCase().equals("Y"))) {
+							anotherJet = true;
+						} else {
+							anotherJet = false;
+
+						}
+
+					}
+
+				}
+
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid option please try again");
+				kb.nextLine();
+			}
+		}
+
+	}
+
 // this method will show a short description of the jets
 	public void makeJetsFly() {
 
@@ -243,6 +307,7 @@ public class JetsApplication {
 
 		}
 	}
+
 // will print the fastest jet
 	public void getFastestJet() {
 
@@ -282,6 +347,7 @@ public class JetsApplication {
 		System.out.println(longestRange);
 
 	}
+
 // will display all the cargo jets
 	private void loadCargoJets() {
 
@@ -296,6 +362,7 @@ public class JetsApplication {
 		}
 
 	}
+
 // will display all the fighter jets
 	private void makeThemFight() {
 		for (Jet jet : af.getJets()) {
@@ -308,6 +375,7 @@ public class JetsApplication {
 			}
 		}
 	}
+
 // will display all the private jets
 	private void boardPassengers() {
 		for (Jet jet : af.getJets()) {
@@ -320,6 +388,7 @@ public class JetsApplication {
 			}
 		}
 	}
+
 // will add new jets to the list
 	private void addJets() {
 		int option = 0;
@@ -448,6 +517,7 @@ public class JetsApplication {
 
 		}
 	}
+
 // will remove any jet from the list
 	private void removeJet() {
 		String removeModel = "";
@@ -484,6 +554,43 @@ public class JetsApplication {
 			} catch (InputMismatchException e) {
 				System.err.println("Invalid option please try again.");
 			}
+		}
+	}
+	
+// will create a new file with the jets that were added
+	private void createNewFile(String fileName) {
+
+		String newFile = "";
+		boolean created = true;
+		
+		while(created) {
+			
+		System.out.println("Please enter the name of the new file: ");
+		newFile = kb.nextLine();
+		
+             
+		if (!newFile.equals(fileName)) {
+			try{
+				
+				FileWriter writer = new FileWriter(newFile); 
+				for(Jet jet: af.getJets()) {
+				  writer.write(jet.getClass().getSimpleName()+","+jet.getModel()+","+jet.getSpeed()+","+jet.getRange()+","+jet.getPrice() + System.lineSeparator());
+				}
+				writer.close();
+				System.out.println();
+				System.out.println();
+				System.out.println("You successfully created a new file");
+				System.out.println();
+				System.out.println();
+				created=false;
+
+			}catch (IOException e) {
+			    e.printStackTrace();
+			}
+		} else {
+			System.out.println("The name that you entered already exists, please enter another name.");
+			created = true;
+		}
 		}
 	}
 }
